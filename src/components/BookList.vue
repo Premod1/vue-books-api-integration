@@ -1,8 +1,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import { useRouter } from 'vue-router';
 
 const books = ref([]);
+const router = useRouter();
 
 
 async function getBooks() {
@@ -15,6 +17,10 @@ async function getBooks() {
   }
 }
 
+const handleOpen = (id) => {
+  router.push({ name: 'about', params: { id } });
+};
+
 onMounted(async () => {
   await getBooks();
 });
@@ -25,7 +31,7 @@ onMounted(async () => {
       <li v-for="book in books" :key="book.id" class="book-item">
         <h2>{{ book.title }}</h2>
         <p>Authors: {{ book.authors }}</p>
-        <img :src="book.image" alt="Book Cover" />
+        <img :src="book.image" alt="Book Cover" @click="handleOpen(book.id)" />
         <a :href="book.url" target="_blank">Read More</a>
       </li>
     </ul>
