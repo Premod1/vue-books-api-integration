@@ -1,18 +1,15 @@
+<script setup>
+import SearchBar from "../components/SearchBar.vue";
+import BookList from "../components/BookList.vue";
+
+
+</script>
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <SearchBar/>
+    <BookList/>
+    
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
-</script>
