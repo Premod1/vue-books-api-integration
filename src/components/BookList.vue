@@ -1,32 +1,21 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import { useRouter } from 'vue-router';
 
-const books = ref([]);
+import { useRouter } from "vue-router";
+
 const router = useRouter();
 
-
-async function getBooks() {
-  try {
-    const response = await axios.get("https://www.dbooks.org/api/recent");
-    books.value = response.data.books;
-    console.log(books.value);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
+const props = defineProps({
+  books: Array,
+});
 
 const handleOpen = (id) => {
-  router.push({ name: 'about', params: { id } });
+  router.push({ name: "about", params: { id } });
 };
 
-onMounted(async () => {
-  await getBooks();
-});
+
 </script>
 <template>
-<div>
+  <div>
     <ul class="book-list">
       <li v-for="book in books" :key="book.id" class="book-item">
         <h2>{{ book.title }}</h2>

@@ -6,9 +6,11 @@ import { ref  } from 'vue';
 const query = ref('');
 const data = ref([]);
 
+const emits = defineEmits(['search'])
 
 const handleInput = () => {
-  searchBook(query.value); // Pass the query value as an argument
+  // searchBook(query.value); // Pass the query value as an argument
+  emits("search", query.value)
 };
 
 async function searchBook(queryValue) {
@@ -39,7 +41,7 @@ async function searchBook(queryValue) {
             v-model="query"
             @input="handleInput"
         />
-        <button class="btn btn-primary">Search</button>
+        <!-- <button class="btn btn-primary">Search</button> -->
     </form>
 
     
@@ -57,8 +59,9 @@ h1 {
 }
 form {
     display: flex;
-    max-width: 480px;
+    max-width: 580px;
     margin: 0 auto 1.5rem;
+    
 }
 form input {
     appearance: none;
@@ -69,10 +72,11 @@ form input {
     color: #888;
     font-size: 1.125rem;
     width: 100%;
+    height: 45px;
 
     /* Add borders and rounded corners */
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 10px;
 }
 button {
     appearance: none;
